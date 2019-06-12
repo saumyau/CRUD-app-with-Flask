@@ -63,12 +63,42 @@ def add_student():
 
     return student_schema.jsonify(new_student)
 
-# Get All Products
+# Get All Students
 @app.route('/student', methods=['GET'])
 def get_students():
     all_students = Student.query.all()
     result = students_schema.dump(all_students)
     return jsonify(result.data)
+
+# Update a Student
+@app.route('/student/<id>', methods=['PUT'])
+def update_student(id):
+    student = Student.query.get(id)
+    name = request.json['name']
+    age = request.json['age']
+    address = request.json['address']
+    phone = request.json['phone']
+    gender = request.json['gender']
+
+    student.name = name
+    student.age = age
+    student.address = address
+    student.phone = phone
+    student.gender = gender
+
+    db.session.commit()
+
+    return student_schema.jsonify(student)
+
+# Delete Student
+@app.route('/student/<id>', methods=['DELETE'])
+def delete_student(id):
+  student = Student.query.get(id)
+  db.session.delete(student)
+  db.session.commit()
+
+  return student_schema.jsonify(student)
+
 
 #Run Server
 if __name__ == '__main__':
