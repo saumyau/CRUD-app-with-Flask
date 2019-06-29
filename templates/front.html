@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Python Flask Bucket List App</title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" ><a href="main">Home</a></li>
+            <li role="presentation"><a href="#">Sign In</a></li>
+            <li role="presentation" class="active"><a href="#">Sign Up</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Python Flask App</h3>
+      </div>
+ 
+      <div class="jumbotron">
+        <h1>Student App</h1>
+        <form action="/addstudent" class="form-signin" id="studentForm" method="post">
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="name" name="name" id="name" class="form-control" placeholder="Name" required autofocus>
+		<br>
+        <label for="inputAge" class="sr-only">Age</label>
+        <input type="name" name="age" id="age" class="form-control" placeholder="Age" required autofocus>
+		<br>
+        <label for="inputAddress" class="sr-only">Address</label>
+        <input type="name" name="address" id="address" class="form-control" placeholder="Address" required>
+		<br>
+		<label for="inputPhone" class="sr-only">Phone Number</label>
+        <input type="name" name="phone" id="phone" class="form-control" placeholder="Phone" required>
+		<br>
+		<label for="inputGender" class="sr-only">Gender</label>
+        <input type="name" name="gender" id="gender" class="form-control" placeholder="Gender" required>
+        <br>
+        <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit" value="submit" form="studentForm">Sign up</button>
+      </form>
+      </div>
+ 
+       
+ 
+      <footer class="footer">
+        <p>&copy; Company 2015</p>
+      </footer>
+ 
+    </div>
+  </body>
+</html>

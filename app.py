@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -48,13 +48,13 @@ student_schema = StudentSchema(strict=True)
 students_schema = StudentSchema(many=True, strict=True)
 
 # Create a Student
-@app.route('/student', methods=['POST'])
+@app.route('/addstudent', methods=['POST'])
 def add_student():
-    name = request.json['name']
-    age = request.json['age']
-    address = request.json['address']
-    phone = request.json['phone']
-    gender = request.json['gender']
+    name = request.form['name']
+    age = request.form['age']
+    address = request.form['address']
+    phone = request.form['phone']
+    gender = request.form['gender']
 
     new_student = Student(name, age, address, phone, gender)
 
@@ -63,12 +63,18 @@ def add_student():
 
     return student_schema.jsonify(new_student)
 
+# Display all students
+@app.route('/getstudents')
+def display():
+    return render_template('display.html')
+
 # Get All Students
 @app.route('/student', methods=['GET'])
 def get_students():
     all_students = Student.query.all()
     result = students_schema.dump(all_students)
     return jsonify(result.data)
+
 
 # Update a Student
 @app.route('/student/<id>', methods=['PUT'])
@@ -99,6 +105,10 @@ def delete_student(id):
 
   return student_schema.jsonify(student)
 
+# Start app
+@app.route("/")
+def main():
+    return render_template('front.html')
 
 #Run Server
 if __name__ == '__main__':
