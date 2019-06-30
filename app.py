@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
+import json
 
 # Init app
 app = Flask(__name__)
@@ -73,6 +74,8 @@ def display():
 def get_students():
     all_students = Student.query.all()
     result = students_schema.dump(all_students)
+    with open('file.json', 'w') as f:
+        json.dump(result.data, f)
     return jsonify(result.data)
 
 

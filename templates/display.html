@@ -15,7 +15,7 @@
 <div class="container">
 <div class="table-responsive">
 <br/>
-<table id="employee_table" class="table table-bordered table-striped">
+<table id="student_table" class="table table-bordered table-striped">
 			<tr>
                 <th>Name</th>
                 <th>Age</th>
@@ -29,29 +29,22 @@
 </div>
 </body>
 <script>
-function setupData() {
-    $(document).ready(function () {
-        $('#employee_table').DataTable({
-            "ajax": {
-                // "url": "static/objects2.txt", // This works for the static file
-                "url": "/student", 
-				"type": "GET",
-                "dataType": "json",
-                "dataSrc": "data",
-                "contentType":"application/json"
-            },
-            "columns": [
-                {"data": "address"},
-                {"data": "age"},
-                {"data": "gender"},
-				{"data": "id"},
-                {"data": "name"},
-                {"data": "phone"}
-            ]
-        });
-    });
-}
-$( window ).on( "load", setupData );
+    $( document ).ready(function(){
+	$.getJSON('file.json', function(data){
+	var student_data = '';
+	$.each(data, function(key,value){
+	student_data += '<tr>';
+	student_data += '<td>' + value.address + '</td>';
+	student_data += '<td>' + value.id + '</td>';
+	student_data += '<td>' + value.age + '</td>';
+	student_data += '<td>' + value.gender + '</td>';
+	student_data += '<td>' + value.name + '</td>';
+	student_data += '<td>' + value.phone + '</td>';
+	student_data += '</tr>';
+	});
+	$('#student_table').append(student_data);
+	});
+	});
 </script>
 </body>
 </html>
